@@ -81,6 +81,16 @@ class Calculator:
         action = button.press()
         if action == "C":
             self.expression = ""
+        elif action == "=":
+            try:
+                result = eval(self.expression)
+                self.expression = str(result)
+            except ZeroDivisionError:
+                messagebox.showerror("Error", "Division by zero!")
+                self.expression = ""
+            except:
+                messagebox.showerror("Error", "Invalid expression!")
+                self.expression = ""
         elif action in "0123456789.":
             self.expression += action
         elif action in "+-*/":

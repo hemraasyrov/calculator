@@ -1,0 +1,42 @@
+@startuml
+abstract class Button {
+    +press(): string
+}
+
+class DigitButton {
+    -_digit: string
+    +press(): string
+}
+
+class OperatorButton {
+    -_operation: string
+    +press(): string
+}
+
+class ClearButton {
+    +press(): string
+}
+
+class EqualsButton {
+    +press(): string
+}
+
+class ButtonFactory {
+    +create_button(button_type: string, value: string): Button
+}
+
+class Calculator {
+    -root: Tk
+    -expression: string
+    -button_instances: List[Button]
+    -entry: Entry
+    +button_click(button: Button)
+}
+
+Button <|.. DigitButton
+Button <|.. OperatorButton
+Button <|.. ClearButton
+Button <|.. EqualsButton
+Calculator --> ButtonFactory
+Calculator o--> "many" Button : uses
+@enduml
